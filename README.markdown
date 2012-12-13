@@ -1,6 +1,6 @@
 # FetLife Demographics
 
-The FetLife Demographics user script displays a demographic breakdown of profiles that have RSVP'ed "yes" to a [FetLife.com](https://fetlife.com/) event, providing an at-a-glance view of who may be participating in the event. 
+The FetLife Demographics user script collates demographic information about a user's friends or profiles that have RSVP'ed "yes" to a [FetLife.com](https://fetlife.com/) event, and displays totals based on groupings of age, sex, and role. This is a helpful metric in quickly determining whether a user is an objectifying troll (e.g., if they list themselves as a "male dom" and their friend list is overwhelmingly "female sub" profiles, ask yourself why this is so), as well as providing an at-a-glance overview of who may be participating in an event.
 
 ## System requirements
 
@@ -20,9 +20,9 @@ If [maybemaimed.com is censored](http://maybemaimed.com/where-im-censored/) wher
 
 ## Using
 
-To use FetLife Demographics, [log in to your FetLife.com account](https://fetlife.com/login) and browse to an event listed on FetLife.com.
+To use FetLife Demographics, [log in to your FetLife.com account](https://fetlife.com/login) and browse to a user profile or an event listed on FetLife.com.
 
-Under the list of user profiles who are "Going" to the event, a "Demographics" line will automatically begin collating information about all users who have RSVP'ed to the event, as shown in the screenshot below:
+Above the list of a user's friends, or under the list of user profiles who are "Going" to the event, a "Demographics" line will automatically begin collating information about all the relevant users, as shown in the screenshot below:
 
 ![Screenshot of FetLife Demographics "loading" display.](http://i.imgur.com/QjHvg.png)
 
@@ -46,5 +46,7 @@ Yes, but you'll need to install the [FetLife Age/Sex/Location Search](http://may
 
 ## Change log
 
+* Version 0.2:
+** Tally demographics in user friends lists.
 * Version 0.1:
 ** Initial release.

@@ -6,12 +6,14 @@
  */
 // ==UserScript==
 // @name           FetLife Demographics
-// @version        0.1
+// @version        0.2
 // @namespace      com.maybemaimed.fetlife.demographics
 // @updateURL      https://userscripts.org/scripts/source/151628.user.js
-// @description    Displays the demographics of FetLife events by age, sex, and role. May help you quickly determine whether an event is worth participating in or not.
+// @description    Displays the demographics of FetLife events and user friend lists by age, sex, and role. May help you quickly determine whether an event is worth participating in or not, or whether a user is an objectifying troll.
 // @include        https://fetlife.com/events/*
 // @exclude        https://fetlife.com/events/*/*
+// @include        https://fetlife.com/users/*
+// @exclude        https://fetlife.com/users/*/*
 // @grant          GM_xmlhttpRequest
 // @grant          GM_addStyle
 // @grant          GM_log
@@ -82,11 +84,11 @@ FL_DEMOGRAPHICS.getKinkstersFromURL = function (url) {
             }
 
             // No pagination? This is the end.
-            if (!doc.querySelector('.pagination')) {
+            if (!doc.querySelector('.previous_page')) {
                 // We're done paginating, so this was the last page.
                 FL_DEMOGRAPHICS.log('Done after searching ' + response.finalUrl)
                 FL_DEMOGRAPHICS.displayTotals();
-            } else if (!doc.querySelector('.pagination .next_page.disabled')) {
+            } else if (!doc.querySelector('.next_page.disabled')) {
                 // Automatically search on next page if not end of pagination.
                 FL_DEMOGRAPHICS.getKinkstersFromURL(next_url);
                 return false;
@@ -218,23 +220,45 @@ FL_DEMOGRAPHICS.getKinkstersMaybeGoing = function (event, page) {
     url = (page) ? url + '?page=' + page.toString() : url ;
     FL_DEMOGRAPHICS.getKinkstersFromURL(url);
 };
+FL_DEMOGRAPHICS.getKinkstersInFriend = function (user_id, page) {
+    var url = 'https://fetlife.com/users/' + user_id.toString() + '/friends';
+    url = (page) ? url + '?page=' + page.toString() : url ;
+    FL_DEMOGRAPHICS.getKinkstersFromURL(url);
+};
 
 // This is the main() function, executed on page load.
 FL_DEMOGRAPHICS.main = function () {
-    // What event is this?
-    var eid = window.location.href.match(/^https:\/\/fetlife.com\/events\/(\d+)/);
-    if (!eid) { // this isn't an event page, so bail early.
-        FL_DEMOGRAPHICS.log('No event ID found in URL: ' + window.location.href);
+    // Find page anchor.
+    html_el = document.querySelector('table.mbxxl td') || document.querySelector('.friends');
+    if (!html_el) {
+        FL_DEMOGRAPHICS.log('No relevant HTML found, page ' + window.location.href + ' likely not user profile or event.');
         return;
     }
 
-    var td = document.querySelector('table.mbxxl td');
+    // Get object ID.
+    var m = window.location.href.match(/^https:\/\/fetlife.com\/(event|user)s\/(\d+)/);
+    if (!m) {
+        FL_DEMOGRAPHICS.log('No user or event ID found in URL: ' + window.location.href);
+        return;
+    }
+
     var div = document.createElement('div');
     div.setAttribute('id', 'fl-demographics-container');
     div.innerHTML = 'Demographics:<div id="fl-demographics-loading">Loading&hellip;</div>';
-    td.appendChild(div);
 
-    // Get the list of "yes" and "maybe" RSVPs
-    var rsvp_yes   = FL_DEMOGRAPHICS.getKinkstersGoing(eid[1]);
-//    var rsvp_maybe = FL_DEMOGRAPHICS.getKinkstersMaybeGoing(eid[1]);
+    switch (m[1]) {
+        case 'user':
+            html_el.parentNode.insertBefore(div, html_el);
+            var friends = FL_DEMOGRAPHICS.getKinkstersInFriend(m[2]);
+        break;
+        case 'event':
+        default:
+            html_el.appendChild(div);
+            // Get the list of "yes" and "maybe" RSVPs
+            var rsvp_yes = FL_DEMOGRAPHICS.getKinkstersGoing(m[2]);
+            //var rsvp_maybe = FL_DEMOGRAPHICS.getKinkstersMaybeGoing(m[1]);
+
+        break;
+    }
+
 };
