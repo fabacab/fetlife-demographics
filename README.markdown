@@ -4,9 +4,15 @@ The FetLife Demographics user script collates demographic information about a us
 
 ## System requirements
 
-To use the FetLife Demographics user script, you must be running [Mozilla Firefox](http://getfirefox.com/) (version 12.0 or higher), with the [Greasemonkey extension](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) installed (at version 1.0 or higher).
+The following software must be installed on your system before installing the FetLife Demographics user script.
 
-Sorry, FetLife Demographics is currently [incompatible with other Web browsers](https://github.com/meitar/fetlife-demographics/issues/1). (Please help me fix that!)
+### Mozilla Firefox
+
+If you use the [Mozilla Firefox](http://getfirefox.com/) web browser (version 12.0 or higher), ensure you have the [Greasemonkey extension](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) installed (at version 1.0 or higher).
+
+### Google Chrome
+
+If you use the [Google Chrome](https://chrome.google.com/) web browser (version 23 or higher), ensure you have the [Tampermonkey extension](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo) installed.
 
 ## Installing
 
@@ -16,7 +22,7 @@ To install FetLife Demographics, go to [http://maybemaimed.com/playground/fetlif
 
 If you enjoy this script, please consider tossing a few metaphorical coins in [my cyberbusking hat](http://maybemaimed.com/cyberbusking/). :) Your donations are sincerely appreciated! Can't afford to part with any coin? It's cool. [Tweet your appreciation, instead](https://twitter.com/intent/tweet?text=It%27s%20much%20easier%20to%20figure%20out%20if%20I%20want%20to%20go%20to%20event%20%40FetLife%20using%20%40maymaym%5C%27s%20%23FetLife%20Demographics%20script%3A%20http%3A%2F%2Fmaybemaimed.com%2Fplayground%2Ffetlife-demographics%2F%20Thanks%5C%21).
 
-If [maybemaimed.com is censored](http://maybemaimed.com/where-im-censored/) where you are, you can alternatively go to [the Userscripts.org page for FetLife Demographics](https://userscripts.org/scripts/show/151628) and click on "[Install](http://userscripts.org/scripts/source/151628.user.js)".
+If [maybemaimed.com is censored](http://maybemaimed.com/where-im-censored/) where you are, you can alternatively go to [the Userscripts.org page for FetLife Demographics](https://userscripts.org/scripts/show/151628) and click on "[Install](http://userscripts.org/scripts/source/151628.user.js)". If the script is also unavailable at Userscripts.org, you can download and install it directly from [GitHub.com](https://github.com/meitar/fetlife-demographics/raw/master/fetlife-demographics.user.js).
 
 ## Using
 
@@ -46,6 +52,8 @@ Yes, but you'll need to install the [FetLife Age/Sex/Location Search](http://may
 
 ## Change log
 
+* Version 0.2.1:
+** Added support for Google Chrome with the Tampermonkey extension installed.
 * Version 0.2:
 ** Tally demographics in user friends lists.
 * Version 0.1:
